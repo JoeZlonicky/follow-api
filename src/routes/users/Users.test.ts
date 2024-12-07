@@ -18,11 +18,19 @@ describe('get requests', () => {
       .get('/users')
       .expect((res) => {
         expect(res.body).toHaveLength([alice, bob].length);
+        expect(res.body).toHaveProperty('[0].id', alice.id);
+        expect(res.body).toHaveProperty('[1].id', bob.id);
       })
       .expect(200, done);
   });
 
   test('get user by id', (done) => {
-    request(app).get(`/users/${alice.id}`).expect(200, done);
+    request(app)
+      .get(`/users/${alice.id}`)
+      .expect((res) => {
+        expect(res.body).toHaveProperty('id', alice.id);
+        expect(res.body).toHaveProperty('displayName', alice.displayName);
+      })
+      .expect(200, done);
   });
 });

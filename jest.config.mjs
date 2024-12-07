@@ -7,4 +7,12 @@ const defaultEsmPreset = createDefaultEsmPreset();
 export default {
   ...defaultEsmPreset,
   globalTeardown: './src/utility/testing/globalTeardown.ts',
+  transform: {
+    '^.+\\.ts$': [
+      'ts-jest',
+      {
+        isolatedModules: true,
+      },
+    ],
+  },
 };

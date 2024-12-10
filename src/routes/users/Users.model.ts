@@ -20,4 +20,15 @@ async function getById(id: number) {
   return result;
 }
 
-export const UsersModel = { getAll, getById };
+async function create(username: string, displayName: string) {
+  const result = await prisma.user.create({
+    data: {
+      username,
+      displayName,
+    },
+  });
+
+  return result;
+}
+
+export const UsersModel = { getAll, getById, create };
